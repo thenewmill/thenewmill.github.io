@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<title>Menu En</title> 
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="menu_en/menu_en.css" />
+		
+		
+	</head> 
+	<body>
+		<script id="replace_with_navbar" src="nav.js"></script>
+		
+		
+		<div class="banner"> 
+			
+			<h2>English Menu</h2> 
+			
+			
+		</div>
+		
+		<div id="image-gallery">
+			<img id="current-image"  alt = "Image Gallery">
+			<span id="overlay" class="loading-spinner"></span>
+		</div>
+		
+		
+		<div class="grid-container"> 
+			<div id="image-thumbs"></div>
+		</div>
+		
+		
+		<script>
+			const images = [
+			'Menu_En_Breakfast',
+			'Menu_En_Sunday',
+			'Menu_En_ChipShop'
+			];
+			
+			var imageThumbs = document.getElementById("image-thumbs");
+			var currentImage = document.getElementById("current-image");
+			
+			let i = 0;
+			
+			var tempImg = new Image();
+			tempImg.onload = function(){
+				currentImage.src = "menu_en/images/" + images[0] + ".jpg"
+				appendImage();
+			}
+			
+			var tryLoadImage = function(){
+				tempImg.src = "menu_en/thumbnails/" + images[i] + ".jpg";
+			}
+			
+			var appendImage = function(){
+				var thumb = document.createElement("img");
+				thumb.src = tempImg.src;
+				thumb.alt = "Image Gallery Image" + images[i] + ".jpg";
+				thumb.classList.add("thumb");
+				imageThumbs.appendChild(thumb);
+				thumb.addEventListener("click", function() {
+					
+					document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
+					currentImage.src = this.src.replace("thumbnails/", "images/");
+					
+					
+					function checkLoaded(){
+						var finishedLoading = document.getElementById("current-image").complete;
+						
+						if (finishedLoading) { 
+							document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
+						}
+						
+						setTimeout(checkLoaded, 1000);
+					}
+					
+					checkLoaded();
+					
+					clearTimeout(checkLoaded);
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+					
+				} );
+				
+				tryLoadImage(i++)
+			}
+			
+			
+			tryLoadImage(i);
+			
+		</script>
+	</body>
+</html>

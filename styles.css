@@ -1,0 +1,135 @@
+/* Define our colour scheme */
+:root {
+    --clr-bg-left:rgba(255, 255, 204, 0.80);
+	--clr-bg-right:rgba(50, 200, 255, 0.75);
+	
+	--clr-nav-bg: #000066;
+	--clr-nav-a: #ffffcc;
+	--clr-nav-hover: #000000;
+	--clr-nav-hover-bg: #99ccff;
+		
+	--clr-spinner: #f3f3f3
+	--clr-spinner-top: #000066
+	
+}
+
+body {
+	background-image: linear-gradient(to bottom right, var(--clr-bg-left), var(--clr-bg-right) ), url('images/BackgroundBW.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed; 
+	background-size: 100% 100%;
+	font-family: 'Brush Script MT', cursive;
+}
+
+/* Add a background color to the top navigation */
+.topnav {
+	background-color: var(--clr-nav-bg);
+	overflow: hidden;
+	position: relative;
+	top: 0;
+	width: 100%;
+	margin: auto;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+	float: left;
+	color: var(--clr-nav-a);
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+	background-color: var(--clr-nav-hover-bg);
+	color: var(--clr-nav-hover);
+}
+
+/* Add a color to the active/current link */
+/* .topnav a.active {
+	background-color: var(--clr-nav-active-bg);
+	color: var(--clr-nav-active);
+} */
+
+/* We need a spacer to place content below the menu */
+.spacer {
+    width: 100%;
+    height: 50px;
+}
+
+.banner { 
+	text-align: center;
+	color: var(--clr-nav-bg);
+}
+
+.grid-container { 
+	text-align: center;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	
+	padding-top: 20px;
+	padding-bottom: 18px;
+}
+
+#image-gallery {
+	position: relative;
+	width: 600px; 
+	margin: 0 auto;
+}
+
+#current-image {
+	position: relative;
+	width: 100%;
+	height: auto;
+	border-radius: 5%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+} 
+
+#overlay {
+	visibility: hidden;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+} 
+
+.thumb {
+ 	width: 100px;
+	height: auto;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	align-items: center;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 5%;
+}
+
+.thumb:hover {
+	box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2)
+}
+
+#image-thumbs {
+	justify-content: center;
+}
+
+.loading-spinner {
+	border: 5px solid #f3f3f3; 
+	border-top: 5px solid #000066;
+	border-radius: 100%;
+	width: 50px;
+	height: 50px;
+	animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}

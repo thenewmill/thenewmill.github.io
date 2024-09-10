@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<title>Events</title> 
+		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="events/events.css" />
+		
+	</head> 
+	<body>
+		<script id="replace_with_navbar" src="nav.js"></script>
+		<div class="banner"> 
+			
+			<h2>What's On</h2> 
+			
+			
+		</div>
+		
+		<div id="image-gallery">
+			<img id="current-image" alt = "Image Gallery">
+			<span id="overlay" class="loading-spinner"></span>
+		</div>
+		
+		
+		<div class="grid-container"> 
+			<div id="image-thumbs"></div>
+		</div>
+		
+		
+		<script>
+			function pad(n, width, z) {
+				z = z || '0';
+				n = n + '';
+				return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+			}
+			
+			var imageThumbs = document.getElementById("image-thumbs");
+			var currentImage = document.getElementById("current-image");
+			
+			let i = 1;
+			// n is the total number of images or less
+			let n = 3;
+			
+			// pick a random image to start from 1 to n
+			let startwith = pad ( ( 1 + Math.floor(Math.random() * n) ), 4 );
+			
+			var tempImg = new Image();
+			tempImg.onload = function(){
+				currentImage.src = "events/images/image" + startwith + ".jpg"
+				appendImage();
+			}
+			
+			var tryLoadImage = function(){
+				tempImg.src = "events/thumbnails/image" + pad(i, 4) + ".jpg";
+			}
+			
+			var appendImage = function(){
+				var thumb = document.createElement("img");
+				thumb.src = tempImg.src;
+				thumb.alt = "Image Gallery Image" + pad(i, 4);
+				thumb.classList.add("thumb");
+				imageThumbs.appendChild(thumb);
+				thumb.addEventListener("click", function() {
+					
+					document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
+					currentImage.src = this.src.replace("thumbnails/", "images/");
+					
+					
+					function checkLoaded(){
+						var finishedLoading = document.getElementById("current-image").complete;
+						
+						if (finishedLoading) { 
+							document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
+						}
+						
+						setTimeout(checkLoaded, 1000);
+					}
+					
+					checkLoaded();
+					
+					clearTimeout(checkLoaded);
+					window.scrollTo({ top: 0, behavior: 'smooth' });
+					
+				} );
+				
+				tryLoadImage(i++)
+			}
+			
+			tryLoadImage(i);
+		</script>
+	</body>
+</html>
