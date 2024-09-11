@@ -12,10 +12,15 @@
 			<h2>Menú en Español</h2> 
 		</div>
 		
+		<!-- Next and previous buttons -->
+		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+			
 		<div id="image-gallery">
 			<img id="current-image"  alt = "Image Gallery">
 			<span id="overlay" class="loading-spinner"></span>
 		</div>
+		
+		<a class="next" onclick="plusSlides(1)">&#10095;</a>
 		
 		<div class="grid-container"> 
 			<div id="image-thumbs"></div>
@@ -23,6 +28,10 @@
 		
 		
 		<script>
+			// max is the total number of images in the folder (or less)
+			let max = 3;
+			max += -1 	// Arrays are one less than max
+			
 			const images = [
 			'Menu_Es_Breakfast',
 			'Menu_Es_Kids',
@@ -33,10 +42,13 @@
 			var currentImage = document.getElementById("current-image");
 			
 			let i = 0;
+			let startwith = 0
 			
 			var tempImg = new Image();
 			tempImg.onload = function(){
 				currentImage.src = "menu_es/images/" + images[0] + ".jpg"
+				currentImage.alt = "Menu Image " + images[startwith] + ".jpg";
+				
 				appendImage();
 			}
 			
@@ -48,9 +60,13 @@
 				var thumb = document.createElement("img");
 				thumb.src = tempImg.src;
 				thumb.alt = "Image Gallery Image" + images[i] + ".jpg";
+				thumb.number = i; // note which thumbnail is which
 				thumb.classList.add("thumb");
 				imageThumbs.appendChild(thumb);
 				thumb.addEventListener("click", function() {
+					// need to set startwith to the image we clicked on
+					// so that we can prev/next 
+					startwith = this.number;
 					
 					document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
 					currentImage.src = this.src.replace("thumbnails/", "images/");
@@ -79,6 +95,17 @@
 			
 			tryLoadImage(i);
 			
+			// Next/previous controls
+			function plusSlides(y) {
+				startwith += y;
+				
+				if (startwith > max) startwith = 0;
+				if (startwith < 0) startwith = max;
+				
+				currentImage.src = "menu_es/images/" + images[startwith] + ".jpg";
+				currentImage.alt = "Image Gallery " + images[startwith];
+			}
+				
 		</script>
 	</body>
 </html>
