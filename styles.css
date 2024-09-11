@@ -143,7 +143,7 @@ body {
 	width: auto;
 	padding: 16px;
 	margin-top: -50px;
-	color: white;
+	color: blue;
 	font-weight: bold;
 	font-size: 20px;
 	border-radius: 0 3px 3px 0;
@@ -166,5 +166,6 @@ body {
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
+	color : gold;
 	background-color: rgba(0, 0, 0, 0.8);
 }
