@@ -7,22 +7,24 @@
 	</head> 
 	<body>
 		<script id="replace_with_navbar" src="nav.js"></script>
-		<div class="banner"> 
-			
-			<h2>Gallery</h2> 
-						
+		<div class="banner"> 			
+			<h2>Gallery</h2> 			
 		</div>
 		
-		<div id="image-gallery">
-			<img id="current-image" alt = "Image Gallery">
+		<!-- Next and previous buttons -->
+		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+		
+		<div id="image-gallery">			
+			<img id="current-image" alt = "Image Gallery">			
 			<span id="overlay" class="loading-spinner"></span>
 		</div>
 		
+		<a class="next" onclick="plusSlides(1)">&#10095;</a>
+		
 		<div class="grid-container"> 
-			<div id="image-thumbs"></div>
+			<div id="image-thumbs"></div>						
 		</div>
-		
-		
+				
 		<script>
 			function pad(n, width, z) {
 				z = z || '0';
@@ -30,59 +32,75 @@
 				return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 			}
 			
-			var imageThumbs = document.getElementById("image-thumbs");
-			var currentImage = document.getElementById("current-image");
+			// max is the total number of images in the folder (or less)
+			let max = 11;
 			
+			let imageThumbs = document.getElementById("image-thumbs");
+			let currentImage = document.getElementById("current-image");
+			
+			// Start with the first image
 			let i = 1;
-			// n is the total number of images or less
-			let n = 11;
 			
-			// pick a random image to start from 1 to n
-			let startwith = pad ( ( 1 + Math.floor(Math.random() * n) ), 4 );
+			// pick a random image to startwith from 1 to max			
+			let startwith =  ( 1 + Math.floor(Math.random() * max) );
 			
-			var tempImg = new Image();
+			// first time up, show our random startwith image
+			let tempImg = new Image();
 			tempImg.onload = function(){
-				currentImage.src = "gallery/images/image" + startwith + ".jpg"
+				currentImage.src = "gallery/images/image" + pad (startwith,4) + ".jpg";
+				currentImage.alt = "Gallery Image " + pad (startwith,4);
 				appendImage();
 			}
 			
-			var tryLoadImage = function(){
+			let tryLoadImage = function(){
 				tempImg.src = "gallery/thumbnails/image" + pad(i, 4) + ".jpg";
 			}
 			
-			var appendImage = function(){
-				var thumb = document.createElement("img");
+			let appendImage = function(){
+				let thumb = document.createElement("img");
 				thumb.src = tempImg.src;
 				thumb.alt = "Image Gallery Image" + pad(i, 4);
+				thumb.number = i; // note which thumbnail is which
 				thumb.classList.add("thumb");
 				imageThumbs.appendChild(thumb);
+				
 				thumb.addEventListener("click", function() {
+					// need to set startwith to the image we clicked on
+					// so that we can prev/next 
+					startwith = this.number;
 					
 					document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
 					currentImage.src = this.src.replace("thumbnails/", "images/");
 					
-					
 					function checkLoaded(){
-						var finishedLoading = document.getElementById("current-image").complete;
-						
+						let finishedLoading = document.getElementById("current-image").complete;					
 						if (finishedLoading) { 
 							document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
-						}
-						
+						}						
 						setTimeout(checkLoaded, 1000);
 					}
 					
 					checkLoaded();
 					
 					clearTimeout(checkLoaded);
-					window.scrollTo({ top: 0, behavior: 'smooth' });
-					
+					window.scrollTo({ top: 0, behavior: 'smooth' });					
 				} );
 				
 				tryLoadImage(i++)
 			}
 			
 			tryLoadImage(i);
+			
+			// Next/previous controls
+			function plusSlides(y) {
+				startwith += y;
+				
+				if (startwith > max) startwith = 1;
+				if (startwith < 1) startwith = max;
+				
+				currentImage.src = "gallery/images/image" + pad(startwith,4) + ".jpg";
+				currentImage.alt = "Image Gallery Image" + pad(startwith,4);
+			}
 		</script>
 	</body>
 </html>
