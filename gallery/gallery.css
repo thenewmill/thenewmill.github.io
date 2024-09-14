@@ -1,23 +1,19 @@
 .grid-container { 
 	text-align: center;
-	margin-left: 600px;
-	margin-right: 600px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	
+	justify-content: center
+
 	padding-top: 20px;
 	padding-bottom: 18px;
 	
 	padding: 5px;
 	overflow: auto;
-	white-space: nowrap;
-		
+	white-space: nowrap;		
 }
 
 #image-gallery {
 	position: relative;
-	width: 800px; 
-	margin: 0 auto;
+	width: 50%; 
+	justify-content: center
 }
 
 #current-image {

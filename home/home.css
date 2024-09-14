@@ -4,8 +4,7 @@
 }
 
 .google-map {
-
-	position: relative;
+	margin: auto;
 }
 
 .google-map iframe {
