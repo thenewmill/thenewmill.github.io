@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>The New Mill</title>
+		<link rel="stylesheet" type="text/css" href="shared_resources/site_styles.css" />
+		
+		<!--		<meta name="viewport" content="width=device-width, initial-scale=1"> -->	
+		
+		
+		<!-- Make the image circular -->
+		<style>		
+			img {
+			border-radius: 50%;
+			border: 5px solid var(--clr-bg-left);
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+			}
+			img:hover {
+			/* Start the shake animation and make the animation last for 0.5 seconds */
+			animation: shake 0.5s;
+			
+			/* When the animation is finished, start again */
+			animation-iteration-count: infinite;
+			}
+			
+			@keyframes shake {
+			0% { transform: translate(1px, 1px) rotate(0deg); }
+			10% { transform: translate(-1px, -2px) rotate(-1deg); }
+			20% { transform: translate(-3px, 0px) rotate(1deg); }
+			30% { transform: translate(3px, 2px) rotate(0deg); }
+			40% { transform: translate(1px, -1px) rotate(1deg); }
+			50% { transform: translate(-1px, 2px) rotate(-1deg); }
+			60% { transform: translate(-3px, 1px) rotate(0deg); }
+			70% { transform: translate(3px, 1px) rotate(-1deg); }
+			80% { transform: translate(-1px, -1px) rotate(1deg); }
+			90% { transform: translate(1px, 2px) rotate(0deg); }
+			100% { transform: translate(1px, -2px) rotate(-1deg); }
+			}			
+			
+		</style>
+	</head>
+	
+	
+	<body>
+		<!-- import our javascript for the menu bar -->		
+		
+		<script id="replace_with_navbar" src="shared_resources/nav.js"></script>
+		
+		<div class="banner">
+			<h1>The New Mill</h1>
+		</div>
+		
+		<h2 align="center">Under New Management</h2>
+		<img src="images/Welcome.jpg" alt="Welcome" style="width:25%" align="center">
+		
+		<script id="replace_with_footer" src="shared_resources/footer.js"></script>
+	
+	</body>
+</html>

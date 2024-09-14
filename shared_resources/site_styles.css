@@ -64,6 +64,11 @@ body {
 	color: var(--clr-nav-bg);
 }
 
+.footer { 
+	text-align: center;
+	color: var(--clr-nav-bg);
+}
+
 .grid-container { 
 	text-align: center;
 	margin-left: 20px;

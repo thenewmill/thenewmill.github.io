@@ -2,7 +2,7 @@
 let folder = "menu_en";
 
 // max is the total number of images in the folder (or less)
-let max = 3;
+let max = 11;
 
 
 function pad(n, width, z) {

@@ -1,18 +1,18 @@
 .opening-hours {
 	margin: auto;
-	height: 80%;
-	width: 50%;
+	width: 30%;
 }
 
 .google-map {
-	margin: auto;
-	height: 80%;
-	width: 50%;
-	padding-bottom: 40%;
+
 	position: relative;
 }
 
 .google-map iframe {
-	position: relative;
 	display: block;
+	border-style: none;
+	left: 0;
+	top: 0;
+	margin: auto;
+	position: relative;
 }
