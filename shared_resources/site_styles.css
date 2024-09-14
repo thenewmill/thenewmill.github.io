@@ -14,7 +14,7 @@
 }
 
 body {
-	background-image: linear-gradient(to bottom right, var(--clr-bg-left), var(--clr-bg-right) ), url('images/BackgroundBW.jpg');
+	background-image: linear-gradient(to bottom right, var(--clr-bg-left), var(--clr-bg-right) ), url('../images/BackgroundBW.jpg');
 	background-repeat: no-repeat;
 	background-attachment: fixed; 
 	background-size: 100% 100%;

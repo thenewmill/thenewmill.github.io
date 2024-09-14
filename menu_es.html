@@ -2,19 +2,20 @@
 <html> 
 	<head> 
 		<title>Menu Es</title> 
-		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="shared_resources/site_styles.css" />
 		<link rel="stylesheet" type="text/css" href="menu_es/menu_es.css" />
 		
 	</head> 
 	<body>
-		<script id="replace_with_navbar" src="nav.js"></script>
+		<!-- import our javascript for the menu bar -->		
+		<script id="replace_with_navbar" src="shared_resources/nav.js"></script>				
 		<div class="banner"> 
 			<h2>Menú en Español</h2> 
 		</div>
 		
 		<!-- Next and previous buttons -->
 		<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-			
+		
 		<div id="image-gallery">
 			<img id="current-image"  alt = "Image Gallery">
 			<span id="overlay" class="loading-spinner"></span>
@@ -25,87 +26,8 @@
 		<div class="grid-container"> 
 			<div id="image-thumbs"></div>
 		</div>
+		<!-- import our javascript for the dynamic gallery -->				
+		<script id="menu_es_show" src="menu_es/menu_es_show.js"></script>
 		
-		
-		<script>
-			// max is the total number of images in the folder (or less)
-			let max = 3;
-			max += -1 	// Arrays are one less than max
-			
-			const images = [
-			'Menu_Es_Breakfast',
-			'Menu_Es_Kids',
-			'Menu_Es_ChipShop'
-			];
-			
-			var imageThumbs = document.getElementById("image-thumbs");
-			var currentImage = document.getElementById("current-image");
-			
-			let i = 0;
-			let startwith = 0
-			
-			var tempImg = new Image();
-			tempImg.onload = function(){
-				currentImage.src = "menu_es/images/" + images[0] + ".jpg"
-				currentImage.alt = "Menu Image " + images[startwith] + ".jpg";
-				
-				appendImage();
-			}
-			
-			var tryLoadImage = function(){
-				tempImg.src = "menu_es/thumbnails/" + images[i] + ".jpg";
-			}
-			
-			var appendImage = function(){
-				var thumb = document.createElement("img");
-				thumb.src = tempImg.src;
-				thumb.alt = "Image Gallery Image" + images[i] + ".jpg";
-				thumb.number = i; // note which thumbnail is which
-				thumb.classList.add("thumb");
-				imageThumbs.appendChild(thumb);
-				thumb.addEventListener("click", function() {
-					// need to set startwith to the image we clicked on
-					// so that we can prev/next 
-					startwith = this.number;
-					
-					document.getElementsByClassName("loading-spinner")[0].style.visibility = "visible";
-					currentImage.src = this.src.replace("thumbnails/", "images/");
-					
-					
-					function checkLoaded(){
-						var finishedLoading = document.getElementById("current-image").complete;
-						
-						if (finishedLoading) { 
-							document.getElementsByClassName("loading-spinner")[0].style.visibility = "hidden"; 
-						}
-						
-						setTimeout(checkLoaded, 1000);
-					}
-					
-					checkLoaded();
-					
-					clearTimeout(checkLoaded);
-					window.scrollTo({ top: 0, behavior: 'smooth' });
-					
-				} );
-				
-				tryLoadImage(i++)
-			}
-			
-			
-			tryLoadImage(i);
-			
-			// Next/previous controls
-			function plusSlides(y) {
-				startwith += y;
-				
-				if (startwith > max) startwith = 0;
-				if (startwith < 0) startwith = max;
-				
-				currentImage.src = "menu_es/images/" + images[startwith] + ".jpg";
-				currentImage.alt = "Image Gallery " + images[startwith];
-			}
-				
-		</script>
 	</body>
 </html>
